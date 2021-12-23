@@ -1,6 +1,10 @@
 #include<iostream>
 #include<vector>
 
+//二分查找
+//虽然数组按照某个pivot旋转了，但是元素仍然有分布规律
+//T：lg(n)
+//M:O(1) 
 using namespace std;
 class Solution {
 public:
