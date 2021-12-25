@@ -1,3 +1,7 @@
+
+//二分法 
+//T:O(lgn)
+//M:O(lgn):递归层数lgn，每层O(1),合在一起O(lgn);
 class Solution {
 public:
 	vector<int> binarySearch(const vector<int>&nums,int start, int end,int target)
