@@ -1,0 +1,50 @@
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        int left =0,right = 0;
+        map<char,int> origin;
+        map<char,int> window;
+        string cp = t;
+        for(int i=0;i<t.size();i++)
+        {
+            origin.insert_or_assign(t[i],origin[t[i]] + 1);
+        }
+        string ans = s + "#";
+        for(int i=0;i<s.length();i++,right ++)
+        {
+            size_t pos = t.find(s[i]);
+            if(pos!=string::npos)
+            {
+                size_t cpos = cp.find(s[i]);
+                if(cpos != string::npos)
+                    cp.erase(cpos,1);
+                window.insert_or_assign(s[i],window[s[i]] + 1);
+            }
+            if(cp.size() == 0)
+            {
+                int j = left;
+                while(j <= right)
+                {
+                    if(origin[s[j]] > 0)
+                    {
+                        if(window[s[j]] - 1 < origin[s[j]])
+                        {
+                            left = j;
+                            cp += s[j];
+                            break;
+                        }
+                        window[s[j]] --;
+                    }
+                    j ++;
+                }
+                if(right - left + 1 <= ans.length())
+                {
+                    ans = s.substr(left, right - left + 1);
+                }
+            } 
+        }
+        if(ans[ans.length()-1] != '#')
+            return ans;
+        else return "";
+    }
+};
